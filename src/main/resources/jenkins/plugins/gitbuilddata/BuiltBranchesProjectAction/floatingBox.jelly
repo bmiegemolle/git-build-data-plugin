@@ -23,14 +23,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <j:jelly xmlns:j="jelly:core">
     <j:if test="${from.isGitProject()}">
-        <table style="padding-top:30px; padding-bottom:15px;">
-            <tr>
-                <td><img src="${rootURL}/plugin/git-build-data/git.png"/></td>
-                <td><h1 style="padding-left:20px;">Built branches</h1></td>
-            </tr>
-        </table>
-        <j:forEach var="branch" items="${from.getBuiltBranches()}">
-            <img src="${resURL}/images/32x32/${branch.getBuildStatus()}"/> <a href="${rootURL}/${branch.getBuildUrl()}" style="padding-left:10px;">#${branch.getBuildNumber()}</a> - <b>${branch.getBranchName()}</b><br/>
-        </j:forEach>
+        <div style="padding:30px">
+            <table style="padding-bottom:15px;">
+                <tr>
+                    <td><img src="${rootURL}/plugin/git-build-data/git.png"/></td>
+                    <td><h1 style="padding-left:20px;">Built branches</h1></td>
+                </tr>
+            </table>
+            <j:forEach var="branch" items="${from.getBuiltBranches()}">
+                <img src="${resURL}/images/32x32/${branch.getBuildStatus()}"/> <a href="${rootURL}/${branch.getBuildUrl()}" style="padding-left:10px;">#${branch.getBuildNumber()}</a> - <b>${branch.getBranchName()}</b><br/>
+            </j:forEach>
+            </div>
     </j:if>
 </j:jelly>
