@@ -68,10 +68,12 @@ public class BuiltBranchesProjectAction implements ProminentProjectAction {
             BuildData buildData = project.getLastBuild().getAction(BuildData.class);
             List<BranchStatus> builtBranches = new ArrayList<BuiltBranchesProjectAction.BranchStatus>();
             for (Entry<String, Build> build : buildData.getBuildsByBranchName().entrySet()) {
-                BranchStatus branchStatus = new BranchStatus(build.getKey(), build.getValue().getBuildNumber(), project
-                        .getBuildByNumber(build.getValue().getBuildNumber()).getUrl(), project.getBuildByNumber(
-                        build.getValue().getBuildNumber()).getResult().color.getImage());
-                builtBranches.add(branchStatus);
+                if (project.getBuildByNumber(build.getValue().getBuildNumber()) != null) {
+                    BranchStatus branchStatus = new BranchStatus(build.getKey(), build.getValue().getBuildNumber(),
+                            project.getBuildByNumber(build.getValue().getBuildNumber()).getUrl(), project
+                                    .getBuildByNumber(build.getValue().getBuildNumber()).getResult().color.getImage());
+                    builtBranches.add(branchStatus);
+                }
             }
             return builtBranches;
         } catch (Exception e) {
